@@ -14,10 +14,6 @@ source py_env/bin/activate
 pip install -r requirements.txt
 ```
 
-### Conda
-
-Instalar Miniconda / Anaconda.
-
 ## **Desarrollo**
 
     a. Test unitarios
@@ -36,10 +32,10 @@ pytest tests/test_math_func.py::test_add -v --disable-warnings
     b. Code Coverage
 
 ```ssh
-# Coverage de todos los test   
+# Coverage de todos los test (informe de terminal sin números de línea, predeterminado)
 pytest --cov=src tests/ -v --disable-warnings
 
-#
+# Code Coverage Report (informe de terminal con números de línea)
 pytest --cov=src tests/ -v --disable-warnings --cov-report term-missing
 ```
 
@@ -52,7 +48,7 @@ flake8 src/ tests/
 # Obtener comentarios sobre las actualizaciones que se deben realizar al código
 pylint tests/test_math_func.py
 
-# Limpiar automáticamente el código.
+# Limpiar automáticamente el código
 autopep8 --in-place --aggressive --aggressive tests/test_math_func.py
 ```
 
@@ -66,11 +62,12 @@ mkdir .github
 cd .github
 mkdir workflows
 cd workflows
+
 # Archivo que detecta cambios en el código y lo ejecuta
 touch ci_tests.yaml
 ```
 
-En el archivo `workflow.yaml` generar el flujo de trabajo que se desea implementar.
+En el archivo `ci_tests.yaml` generar el flujo de trabajo que se desea implementar.
 
 ## **Github**
 
@@ -89,6 +86,10 @@ git checkout dev
 
 git add .
 git commit -m "feat(01-ci-github): añadir archivos al repo"
+git push origin dev
+
+git add .
+git commit -m "fix(01-ci-github): corregir README"
 git push origin dev
 
 # Merge con rama main:
