@@ -95,5 +95,5 @@ git push origin dev
 # Merge con rama main:
 
 git checkout main
-git merge dev -m "merge 01-ci-github sin conflictos"
+git merge dev -m "feat(01-ci-github): merge sin conflictos"
 ```
