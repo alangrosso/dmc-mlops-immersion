@@ -1,0 +1,14 @@
+name: ci-tests
+on: [push]
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    container: python:3.8
+    steps:
+      - uses: actions/checkout@dev      
+      - name: ci_run
+        run: |
+          pip install -r requeriments.txt
+          pytest tests/ . -v --disable-warnings
+          pytest --cov=src tests/ -v --disable-warnings
+          flake8 src/ tests/
