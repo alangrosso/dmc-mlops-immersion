@@ -4,5 +4,3 @@ venv/
 py_venv/
 .coverage
 *cache*
-
-Laboratorio.txt
