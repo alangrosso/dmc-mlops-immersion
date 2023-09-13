@@ -88,7 +88,12 @@ git add .
 git commit -m "feat(04-pipeline-ml-ci-cd): añadir archivos al repo"
 git push origin dev
 
+git add .
+git commit -m "fix(04-pipeline-ml-ci-cd): corregir cml.yaml y README"
+git push origin dev
+
 # Merge con rama main:
+
 git checkout main
 git merge dev -m "feat(04-pipeline-ml-ci-cd): merge sin conflictos"
 ```

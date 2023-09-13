@@ -13,8 +13,7 @@ jobs:
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pip3 install --upgrade protobuf==3.20.0
-          pip3 install mlflow==1.26.0
+          pip3 install mlflow==2.2.0
           mlflow run .
 
           echo "## Model metrics" > report.md
