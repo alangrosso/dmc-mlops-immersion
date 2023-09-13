@@ -1,4 +1,4 @@
-name: pipeline-ml-mlflow 
+name: pipeline-genre-classification
 channels:
   - conda-forge
   - defaults
