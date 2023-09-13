@@ -58,6 +58,24 @@ Configurar archivos para Github:
 evaluate/run.py
 ```
 
+Agregar secretos en GitHub:
+
+- Accede a tu repositorio: Inicia sesión en tu cuenta de GitHub y navega hasta el repositorio en el que deseas agregar los secretos.
+
+- Abre la pestaña "Settings" (Configuración): En la parte superior de la página de tu repositorio, haz clic en la pestaña "Settings" (Configuración).
+
+- Navega a "Secrets" (Secretos): En el menú de la izquierda, selecciona la opción "Secrets" (Secretos).
+
+- Haz clic en "New repository secret" (Nuevo secreto de repositorio): En la página de secretos, verás un botón verde llamado "New repository secret" (Nuevo secreto de repositorio). Haz clic en él para agregar un nuevo secreto.
+
+- Ingresa el nombre y el valor del secreto: Deberás proporcionar un nombre descriptivo para el secreto en el campo "Name" (Nombre) y el valor del secreto en el campo "Value" (Valor).
+
+- Haz clic en "Add secret" (Agregar secreto): Una vez que hayas ingresado el nombre y el valor del secreto, haz clic en el botón "Add secret" (Agregar secreto) para guardar el secreto.
+
+- Repite el proceso según sea necesario: Puedes agregar tantos secretos como desees repitiendo los pasos anteriores.
+
+- Usa los secretos en tus flujos de trabajo: Una vez que hayas agregado los secretos, puedes acceder a ellos en tus flujos de trabajo de GitHub Actions utilizando la sintaxis ${{ secrets.NOMBRE_DEL_SECRETO }}, donde "NOMBRE_DEL_SECRETO" es el nombre que asignaste al secreto.
+
 Crear archivos para CI y configurar workflow:
 
 ```ssh
