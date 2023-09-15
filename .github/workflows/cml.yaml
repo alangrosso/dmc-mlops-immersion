@@ -1,6 +1,6 @@
 name: genre-classification
 
-on: [push]
+on: push
   branches: [dev]
 
 jobs:
