@@ -1,8 +1,9 @@
 name: genre-classification
 
-on: push
-  Branches: 
-    - dev
+on: 
+  push
+    branches: 
+      - dev
 
 jobs:
   build:
