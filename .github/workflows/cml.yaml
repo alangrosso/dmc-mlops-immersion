@@ -1,7 +1,7 @@
 name: genre-classification
 
 on: push
-  branches: 
+  Branches: 
     - dev
 
 jobs:
