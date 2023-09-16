@@ -7,7 +7,7 @@ on:
 
 jobs:
   build: # nombre del job
-    runs-on: [ubuntu:20.04] # latest
+    runs-on: [ubuntu-20.04] # latest
     container: alangrosso/cml-conda:latest
     
     steps:
