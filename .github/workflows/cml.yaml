@@ -13,7 +13,10 @@ jobs:
     container: alangrosso/cml-conda:latest
     
     steps:
-      - uses: actions/checkout@v2
+      - name: checkout_repositorio
+        uses: actions/checkout@v2
+        with:
+          node-version: 16
       - name: cml_run
         env:
           repo_token: ${{ secrets.ML_PIPELINE_GITHUB_TOKEN }}
