@@ -24,6 +24,7 @@ jobs:
           repo_token: ${{ secrets.ML_PIPELINE_GITHUB_TOKEN }}
         run: |
           pip3 install mlflow==2.2.0
+          export HYDRA_FULL_ERROR=1
           mlflow run 04-pipeline-ml-ci-cd/.
 
           echo "## Model metrics" > report.md
