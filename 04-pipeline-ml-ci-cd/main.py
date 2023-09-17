@@ -85,7 +85,7 @@ def go(config: DictConfig):
 
     if "random_forest" in steps_to_execute:
         # Serialize decision tree configuration
-        model_config = os.path.abspath("random_forest_config.yml")
+        model_config = os.path.abspath("rf_config.yml") # random_forest_config
 
         with open(model_config, "w+") as fp:
             fp.write(OmegaConf.to_yaml(config["random_forest_pipeline"]))
