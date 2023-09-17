@@ -25,7 +25,7 @@ jobs:
         run: |
           sudo apt-get update
           export HYDRA_FULL_ERROR=1
-          pip3 install pandas==1.5.3 numpy==1.23.5 mlflow==2.2.0 hydra-core==1.3.2 hydra-joblib-launcher==1.2.0
+          pip3 install pandas==1.2.3 numpy==1.16.5 mlflow==1.26.0
           mlflow run 04-pipeline-ml-ci-cd/.
           # mlflow run 04-pipeline-ml-ci-cd/. -P hydra_options="-m random_forest_pipeline.random_forest.n_estimators=60,80 random_forest_pipeline.random_forest.max_depth=range(3,11,4) random_forest_pipeline.random_forest.min_samples_split=15,30"
 
