@@ -23,7 +23,7 @@ jobs:
         env:
           repo_token: ${{ secrets.ML_PIPELINE_GITHUB_TOKEN }}
         run: |
-          sudo apt-get update
+          # sudo apt-get update
           export HYDRA_FULL_ERROR=1
           pip3 install pandas==1.2.3 numpy==1.16.5 mlflow==1.26.0
           mlflow run 04-pipeline-ml-ci-cd/.
