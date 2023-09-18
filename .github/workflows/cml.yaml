@@ -26,7 +26,8 @@ jobs:
           # sudo apt-get update
           export HYDRA_FULL_ERROR=1
           pip3 install --upgrade protobuf==3.20.0
-          pip3 install mlflow==1.26.0 # pandas==1.2.3 numpy # ==1.16.5
+          pip3 install mlflow==1.26.0
+          touch 04-pipeline-ml-ci-cd/evaluate/metrics.txt
           mlflow run 04-pipeline-ml-ci-cd/.
           
           echo "## Model metrics" > report.md
