@@ -38,6 +38,6 @@ jobs:
           cat 04-pipeline-ml-ci-cd/evaluate/metrics.txt >> report.md
           echo "## Confusion Matrix Test Dataset" >> report.md
           echo "![](04-pipeline-ml-ci-cd/evaluate/img/confusion_matrix.png)" >> report.md
-          
+
           # Enviar el informe
-          cml comment report.md
+          cml comment create report.md
