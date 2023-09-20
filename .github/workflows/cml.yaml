@@ -14,11 +14,6 @@ jobs:
       - name: Checkout repositorio
         uses: actions/checkout@v3
       
-      # - name: Setup NodeJS 16
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: 16
-
       - name: Ejecutar MLflow cml-run
         run: |
           # Configurar la variable de entorno para mostrar errores completos de Hydra
@@ -40,4 +35,4 @@ jobs:
           # Enviar el informe
           cml comment create report.md
         env:
-          repo_token: ${{ secrets.ML_PIPELINE_GITHUB_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
