@@ -6,22 +6,20 @@ on:
       - dev
 
 jobs:
-  build: # nombre del job
+  train-and-report: # nombre del job
     runs-on: [ubuntu-latest]
     container: alangrosso/cml-conda:latest
     
     steps:
       - name: Checkout repositorio
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
-      - name: Setup NodeJS 16
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16
+      # - name: Setup NodeJS 16
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: 16
 
       - name: Ejecutar MLflow cml-run
-        env:
-          repo_token: ${{ secrets.ML_PIPELINE_GITHUB_TOKEN }}
         run: |
           # Configurar la variable de entorno para mostrar errores completos de Hydra
           export HYDRA_FULL_ERROR=1
@@ -30,10 +28,10 @@ jobs:
           pip3 install --upgrade protobuf==3.20.0
           pip3 install mlflow==1.26.0
 
-          # Ejecutar workflow
+          # Ejecutar pipeline
           mlflow run 04-pipeline-ml-ci-cd/.
           
-          # Generar un informe en Markdown
+          # Generar reporte en Markdown
           echo "## Model metrics" > report.md
           cat 04-pipeline-ml-ci-cd/evaluate/metrics.txt >> report.md
           echo "## Confusion Matrix Test Dataset" >> report.md
@@ -41,3 +39,5 @@ jobs:
 
           # Enviar el informe
           cml comment create report.md
+        env:
+          repo_token: ${{ secrets.ML_PIPELINE_GITHUB_TOKEN }}
