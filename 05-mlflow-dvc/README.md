@@ -64,6 +64,8 @@ git add 05-mlflow-dvc/
 git commit -m "feat(05-mlflow-dvc): primera version codigo + data"
 
 # crear tag para tracking de version de data
+git tag -a v1
+# O
 git tag -a 'v1' -m 'version-1 wine-quality.csv'
 ```
 
