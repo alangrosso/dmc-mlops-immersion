@@ -102,7 +102,6 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
 .venv
 env/
 venv/
@@ -128,14 +127,20 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# MLflow
-mlruns/
+# PyCharm
+*.DS_Store
+*.idea*
 
-# VSC
-.vscode/
-/.vscode/settings.json
+# others
+external_storage/*
+old/*
+*.old
+pg_data*
+artifacts*
 
 # DVC
-/.dvc
 .dvc/
-.dvcignore
+train_data/wine-quality.csv
+
+# 
+*.Identifier
