@@ -140,7 +140,7 @@ artifacts*
 
 # DVC
 .dvc/
-train_data/wine-quality.csv
+# train_data/wine-quality.csv
 
 # 
 *.Identifier

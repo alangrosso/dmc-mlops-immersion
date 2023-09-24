@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import mlflow.sklearn
 import logging
 import warnings
@@ -11,7 +11,7 @@ import sys
 import pdb
 import os
 
-load_dotenv()
+# load_dotenv()
 
 logging.basicConfig(level=logging.WARN)
 logger = logging.getLogger(__name__)
