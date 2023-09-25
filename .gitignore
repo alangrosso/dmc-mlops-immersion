@@ -136,6 +136,6 @@ mlruns/
 /.vscode/settings.json
 
 # DVC
-/.dvc
-.dvc/
+# /.dvc
+# .dvc/
 .dvcignore
