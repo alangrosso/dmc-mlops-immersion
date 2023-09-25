@@ -4,7 +4,7 @@ Mlflow y DVC con Docker.
 
 ## Track & Push a DVC storage
 
-- Instalar y configurar DVC.
+- Instalar DVC.
 
 ```
 # Instalar
@@ -19,42 +19,44 @@ sudo install -o root -g root -m 644 packages.iterative.gpg /etc/apt/trusted.gpg.
 rm -f packages.iterative.gpg
 sudo apt update
 sudo apt install dvc==2.54.0
+```
 
-# Inicializar
+- Configurar DVC.
+
+```
+# Inicializar (en directorio de repositorio)
+git init
 dvc init
 
-# Establecer Storage (en este caso: local)
-mkdir external_storage
-dvc remote add -d dvc-agr $PWD/external_storage
+# Establecer storage (en este caso: local)
+mkdir 05-mlflow-dvc/external_storage/
+dvc remote add -d dvc-agr 05-mlflow-dvc/external_storage/
 
-# Storages remoto
+# Verificar storages
 cat .dvc/config
 ```
 
 - Datos a utilizar: `train_data/wine-quality.csv`.
 
-- Tracking train-data con DVC:
+- Tracking train_data con DVC:
 
 ```
-# Agregar Data a Storage (DVC)
-dvc add train_data/wine-quality.csv
+# Agregar data a Storage (DVC)
+dvc add 05-mlflow-dvc/train_data/wine-quality.csv
 
-# Trackear MetaData (git) y que ignore esta data
-git add train_data/wine-quality.csv.dvc train_data/.gitignore
+# Trackear metadata con git
+git add 05-mlflow-dvc/train_data/wine-quality.csv.dvc 05-mlflow-dvc/train_data/.gitignore
 
 # Push 
 dvc push
-```
 
-- Verificar push a DVC:
-
-```
-ls -lR external_storage/
+# Verificar push a DVC:
+ls -lR 05-mlflow-dvc/external_storage/
 ```
 
 - Verificar en `train_data/`: 
 
-train_data/wine-quality.csv.dvc.
+05-mlflow-dvc/train_data/wine-quality.csv.dvc
 .gitignore (no trackear wine-quality.csv a git)
 
 - Agregar archivos a Github
@@ -64,8 +66,6 @@ git add 05-mlflow-dvc/
 git commit -m "feat(05-mlflow-dvc): primera version codigo + data"
 
 # crear tag para tracking de version de data
-git tag -a v1
-# O
 git tag -a 'v1' -m 'version-1 wine-quality.csv'
 ```
 

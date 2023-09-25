@@ -144,3 +144,6 @@ artifacts*
 
 # 
 *.Identifier
+
+# Notebook
+prueba.ipynb
