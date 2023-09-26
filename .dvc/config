@@ -1,4 +1,4 @@
 [core]
     remote = dvc-agr
 ['remote "dvc-agr"']
-    url = ../05-mlflow-dvc/external_storage
+    url = /home/agr/DMC/dmc-mlops-immersion/05-mlflow-dvc/external_storage

@@ -69,11 +69,10 @@ git commit -m "feat(05-mlflow-dvc): primera version codigo + data"
 git tag -a 'v1' -m 'version-1 wine-quality.csv'
 ```
 
-
-
+- Ejecutar modelo
 
 ```
-
+python 05-mlflow-dvc/train.py
 ```
 
 
