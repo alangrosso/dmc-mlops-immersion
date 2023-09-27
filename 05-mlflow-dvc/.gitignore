@@ -147,3 +147,10 @@ artifacts*
 
 # Notebook
 prueba.ipynb
+
+# csv
+features.csv
+targets.csv
+
+# data
+train_data/wine-quality.csv.bak

@@ -137,5 +137,5 @@ mlruns/
 
 # DVC
 # /.dvc
-# .dvc/
+.dvc/
 .dvcignore

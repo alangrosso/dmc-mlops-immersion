@@ -1,7 +1,5 @@
 # **MLFLOW & DVC**
 
-Mlflow y DVC con Docker.
-
 ## Track & Push a DVC storage
 
 - Instalar DVC.
@@ -30,7 +28,7 @@ dvc init
 
 # Establecer storage (en este caso: local)
 mkdir 05-mlflow-dvc/external_storage/
-dvc remote add -d dvc-agr 05-mlflow-dvc/external_storage/
+dvc remote add -d dvc-agr './05-mlflow-dvc/external_storage/'
 
 # Verificar storages
 cat .dvc/config
@@ -56,10 +54,10 @@ ls -lR 05-mlflow-dvc/external_storage/
 
 - Verificar en `train_data/`: 
 
-05-mlflow-dvc/train_data/wine-quality.csv.dvc
-.gitignore (no trackear wine-quality.csv a git)
+    05-mlflow-dvc/train_data/wine-quality.csv.dvc
+    .gitignore (no trackear wine-quality.csv a git)
 
-- Agregar archivos a Github
+- Commit archivos.
 
 ```
 git add 05-mlflow-dvc/
@@ -67,97 +65,79 @@ git commit -m "feat(05-mlflow-dvc): primera version codigo + data"
 
 # crear tag para tracking de version de data
 git tag -a 'v1' -m 'version-1 wine-quality.csv'
+
+# Comandos adicionales
+
+## eliminar un tag localmente 
+git tag -d NOMBRE_DEL_TAG
+
+## eliminar un tag específico
+git push --delete origin NOMBRE_DEL_TAG
+
+## eliminar el tag de GitHub (remotamente) después de haberlo eliminado localmente
+git push origin :refs/tags/NOMBRE_DEL_TAG
 ```
 
-- Ejecutar modelo
+- Ejecutar modelo.
 
 ```
 python 05-mlflow-dvc/train.py
 ```
 
+Verificar MLflow: `http://127.0.0.1:5000/`.
 
+## Probar la funcionalidad de DVC
 
-```
-
-```
-
-
-
-## Test DVC functionality by removing the dataset
-
-
+Eliminar un conjunto de datos.
 
 ```
-# remove the train-data file: 
-rm -rf train_data/wine-quality.csv
+# Remover train-data
+rm -rf 05-mlflow-dvc/train_data/wine-quality.csv
 
-# also, remove from the cache: 
+# Remover train-data de cache
 rm -rf .dvc/cache
 
-# bring back the file: 
+# Devolver el archivo: 
 dvc pull
 ```
 
-- verify train_data/wine-quality.csv is back
+- Verificar que se haya recuperado: 05-mlflow-dvc/train_data/wine-quality.csv.
 
-## New version of the dataset
+## Nueva versión del dataset
+
+Modificar un dataset existente.
 
 ```
-# alter the file by removing some rows: 
-sed -i '.old' '2005,3004d' train_data/wine-quality.csv
+# Remover train-data de Git
+git rm -r --cached '05-mlflow-dvc/train_data/wine-quality.csv'
+git commit -m "detener tracking 05-mlflow-dvc/train_data/wine-quality.csv" 
 
-# add to dvc (repeated procedure): 
-dvc add train_data/wine-quality.csv
+# Opción 1: Remover algunas filas del dataset
+sed -i.old '2005,3004d' 05-mlflow-dvc/train_data/wine-quality.csv
 
-# add to git associated .dvc file (repeated procedure): 
-git add train_data/wine-quality.csv.dvc
+# Opción 2:  Remover filas del dataset generando copia de respaldo
+sed -i.bak '2005,3004d' 05-mlflow-dvc/train_data/wine-quality.csv
 
-# commit changes: 
-git commit -m "train_data: remove 1000 rows"
+# Agregar a DVC
+dvc add 05-mlflow-dvc/train_data/wine-quality.csv
 
-# create a tag (v2) for later tracking of your data: 
-git tag -a 'v2' -m 'version-2 wine-quality.csv removed 1000 rows'
+# Agregar a git
+git add 05-mlflow-dvc/train_data/wine-quality.csv.dvc
 
-# push the version of your data to dvc storage: 
+# Commit 
+git commit -m "train_data: remover 1000 filas"
+
+# Crear tag (v2) para tracking de data
+git tag -a 'v2' -m 'version-2 wine-quality.csv remover 1000 filas'
+
+# Push versión del dataset a DVC storage: 
 dvc push
 
-# verify push to dvc: 
-ls -lR external_storage/
+# Verificar push a DVC
+ls -lR 05-mlflow-dvc/external_storage/
+
+# Ejecutar modelo (actualizar VERSION)
+python 05-mlflow-dvc/train.py
 ```
 
-## Put Mlflow in action
-
-- Ejecutar Mlflow
-
-```
-# remove the dataset: 
-rm -rf train_data/wine-quality.csv & rm -rf .dvc/cache
-
-# reproduce dataset versions with dvc-api in: 
-train.py
-```
-
-- train.py contains all mlflow tracking
-- take a look in deploy-script.sh how to run mlflow server as a docker container
-- go to mlflow-ui & look logged params, in my case: http://localhost:7755
-
-### Notes to spin-up a mlflow docker container
-
-```
-# create docker network: 
-docker network create cesar_net
-
-# run a postgress container: 
-docker run --network cesar_net --expose=5432 -p 5432:5432 -d -v $PWD/pg_data_1/:/var/lib/postgresql/data/ --name pg_mlflow -e POSTGRES_USER='user_pg' -e POSTGRES_PASSWORD='pass_pg' postgres
-
-# build Dockerfile: 
-docker build -t mlflow_cesar .
-```
-
-- modify env var default_artifact_root in local.env with your current directory
-
-```
-# run mlflow server container: 
-docker run -d -p 7755:5000 -v $PWD/artifacts:$PWD/artifacts --env-file local.env --network cesar_net --name test mlflow_cesar
-```
-
+Verificar MLflow: `http://127.0.0.1:5000/`.

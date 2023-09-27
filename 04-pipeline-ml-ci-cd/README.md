@@ -48,7 +48,7 @@ docker run -d -p 7755:5000 -v $PWD/container_artifacts:$PWD/container_artifacts 
 
 Verificar MLflow: `http://0.0.0.0:5000/`
 
-## **Github**
+## **Continuous Machine Learning (CML)**
 
 Configurar archivos para Github:
 
@@ -57,24 +57,6 @@ Configurar archivos para Github:
 
 evaluate/run.py
 ```
-
-Agregar secretos en GitHub:
-
-- Inicia sesión en tu cuenta de GitHub y navega hasta el repositorio en el que deseas agregar los secretos.
-
-- En la parte superior de la página de tu repositorio, haz clic en la pestaña "Settings" (Configuración).
-
-- En el menú de la izquierda, selecciona la opción "Secrets" (Secretos).
-
-- En la página de secretos, verás un botón llamado "New repository secret" (Nuevo secreto de repositorio). Haz clic en él para agregar un nuevo secreto.
-
-- Deberás proporcionar un nombre descriptivo para el secreto en el campo "Name" (Nombre) y el valor del secreto en el campo "Value" (Valor).
-
-- Una vez que hayas ingresado el nombre y el valor del secreto, haz clic en el botón "Add secret" (Agregar secreto) para guardar el secreto.
-
-- Repite el proceso según sea necesario. Puedes agregar tantos secretos como desees repitiendo los pasos anteriores.
-
-- Una vez que hayas agregado los secretos, puedes acceder a ellos en tus flujos de trabajo de GitHub Actions utilizando la sintaxis ${{ secrets.NOMBRE_DEL_SECRETO }}, donde "NOMBRE_DEL_SECRETO" es el nombre que asignaste al secreto.
 
 Crear archivos para CI y configurar workflow:
 
@@ -89,29 +71,34 @@ cd workflows
 touch cml.yaml
 ```
 
+Al inicio de cada trabajo del workflow, GitHub crea automáticamente un secreto `GITHUB_TOKEN` único para usarlo en el workflow. Se usa GITHUB_TOKEN para autenticarse en el workflow.
+
+Crear nueva rama para CML.
+
+```ssh
+git checkout -b cml
+```
+
 Subir pipeline a Github.
 
 ```ssh
-# Crear repo
+git add 04-pipeline-ml-ci-cd/
+git add .github/workflows/
+git add .gitignore
 
-# Iniciar
+git commit -m "feat(04-pipeline-ml-ci-cd): crear branch cml y agregar pipeline"
+git push origin cml
+```
 
-git init
-git pull
+Verificar que se haya ejecutado workflow.
 
-git branch dev
+```ssh
+# Agregar files a dev
 git checkout dev
-
-git add .
-git commit -m "feat(04-pipeline-ml-ci-cd): añadir archivos al repo"
-git push origin dev
-
-git add .
-git commit -m "fix(04-pipeline-ml-ci-cd): corregir cml.yaml y README"
+git commit -m "fix(04-pipeline-ml-ci-cd): agregar files de branch cml a dev"
 git push origin dev
 
 # Merge con rama main:
-
 git checkout main
 git merge dev -m "feat(04-pipeline-ml-ci-cd): merge sin conflictos"
 ```

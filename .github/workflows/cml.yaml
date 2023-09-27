@@ -3,7 +3,7 @@ name: genre-classification
 on: 
   push:
     branches: 
-      - dev
+      - cml
 
 jobs:
   train-and-report: # nombre del job
