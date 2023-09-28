@@ -95,11 +95,9 @@ Subir pipeline a Github.
 # Iniciar
 
 Verificar que se haya ejecutado workflow.
-Verificar que se haya ejecutado workflow.
 
 git branch dev
 git checkout dev
-git commit -m "fix(04-pipeline-ml-ci-cd): agregar files de branch cml a dev"
 git commit -m "fix(04-pipeline-ml-ci-cd): agregar files de branch cml a dev"
 git push origin dev
 
