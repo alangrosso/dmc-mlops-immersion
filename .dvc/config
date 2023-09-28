@@ -1,0 +1,4 @@
+[core]
+    remote = dvc-agr
+['remote "dvc-agr"']
+    url = ../05-mlflow-dvc/external_storage

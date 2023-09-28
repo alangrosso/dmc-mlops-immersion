@@ -48,7 +48,7 @@ docker run -d -p 7755:5000 -v $PWD/container_artifacts:$PWD/container_artifacts 
 
 Verificar MLflow: `http://0.0.0.0:5000/`
 
-## **Continuous Machine Learning (CML) para Machine Learning**
+## **Continuous Machine Learning (CML)**
 
 Configurar archivos para Github:
 
@@ -75,6 +75,14 @@ Al inicio de cada trabajo del workflow, GitHub crea automáticamente un secreto 
 
 Crear nueva rama para CML.
 
+```ssh
+git checkout -b cml
+```
+
+Al inicio de cada trabajo del workflow, GitHub crea automáticamente un secreto `GITHUB_TOKEN` único para usarlo en el workflow. Se usa GITHUB_TOKEN para autenticarse en el workflow.
+
+Crear nueva rama para CML.
+
 ```
  git checkout -b cml
 ```
@@ -82,18 +90,13 @@ Crear nueva rama para CML.
 Subir pipeline a Github.
 
 ```ssh
-git add 04-pipeline-ml-ci-cd/
-git add .github/workflows/
-git add .gitignore
+# Crear repo
 
-git commit -m "fix(04-pipeline-ml-ci-cd): crear branch cml y agregar pipeline"
-git push origin cml
-```
+# Iniciar
 
 Verificar que se haya ejecutado workflow.
 
-```
-# Agregar files a dev
+git branch dev
 git checkout dev
 git commit -m "fix(04-pipeline-ml-ci-cd): agregar files de branch cml a dev"
 git push origin dev
