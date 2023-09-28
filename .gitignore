@@ -128,6 +128,12 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+<<<<<<< HEAD
+=======
+# VSCode
+.vscode/
+
+>>>>>>> 7231d014c148bdd9dca77bb888a4803a645747a2
 # MLflow
 mlruns/
 
